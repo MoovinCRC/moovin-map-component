@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moovin Shopify Map</title>
+    <!-- MOOVIN START -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- hererapi css -->
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <!-- hererapi css -->
+
+    <!-- hereapi js -->
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+    <!-- hereapi js -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=<aquí el APIKEY>&libraries=places"></script>
+    <link rel="stylesheet" type="text/css" href="css/globalStyles.css">
+</head>
+
+<body>
+    <!-- MOOVIN START -->
+    <div>
+        <p style="font-weight: bold">Por favor especificar el lugar de envío:</p>
+        <p></p>
+        <div>
+            <span style="width: 125px; display: inline-block">Provincia:</span>
+            <select id="moovin_data_provincia" style="width: 200px"></select><br />
+            <span style="width: 125px; display: inline-block">Cantón:</span>
+            <select id="moovin_data_canton" style="width: 200px"></select><br />
+            <span style="width: 125px; display: inline-block">Distrito:</span>
+            <select id="moovin_data_distrito" style="width: 200px"></select><br />
+            <span style="width: 125px; display: inline-block">Código Postal:</span>
+            <input type="text" id="moovin_data_code" maxlength="5" style="width: 184px; font-weight: bold" />
+            <br />
+            <span style="width: 125px; display: inline-block"></span>
+            <button type="button" id="btn_reset" class="btn btn-danger">Limpiar</button>
+            <!-- <div id="carrier-section" style="visibility: visible; margin-bottom: 5px">
+                <span style="width: 125px; display: inline-block">Carrier:</span>
+                <select id="carriers" style="width: 200px">
+                    <option value="moovin-express">Moovin Express</option>
+                    <option value="moovin-ruta">Moovin Ruta (Día + 1)</option>
+                </select>
+            </div> -->
+            <div id="moovin-section" style="visibility: visible; max-width: 640px">
+                <input id="moovin_state" type="hidden" value="" />
+                <input id="moovin_lat" type="hidden" name="attributes[moovin_lat]" value="{{ cart.attributes["
+                    moovin_lat"] }}">
+                <input id="moovin_lng" type="hidden" name="attributes[moovin_lng]" value="{{ cart.attributes["
+                    moovin_lng"] }}">
+                <input id="moovin_address" type="text" placeholder="Buscar dirección"
+                    style="margin-bottom: 5px; width: 625px" name="attributes[moovin_addr]"
+                    value="" /><!-- {{ cart.attributes["moovin_addr"] }} -->
+                <div id="map" style="height: 480px; width: 640px; border: 1px solid #ccc; border-radius: 5px"></div>
+                <div id="popup_map">Zona de Cobertura Moovin</div>
+                <div id="zone_alert" style="color: red; visibility: hidden;">No hay cobertura de express para esta zona
+                </div>
+                <div id="code_alert" style="color: red; visibility: hidden;">Error al obtener el código postal
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/crcodes.js" type="module"></script>
+    <script src="js/here-map/initMap.js" type="module"></script>
+    <script src="js/here-map/listeners.js" type="module"></script>
+</body>
+
+</html>
